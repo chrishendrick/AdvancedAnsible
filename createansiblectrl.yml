@@ -31,7 +31,7 @@
             name: "ansible"
             state: latest
 
-        - name: Install msql community package
+        - name: Install mysql community package
           shell: ansible-galaxy collection install community.mysql
 
         - name: Install git at latest version
@@ -40,10 +40,10 @@
             state: latest
 
         - name: Configure git global user name
-          shell: "git config --global user.name “Chris Hendrick”"
+          shell: "git config --global user.name 'Chris Hendrick'"
 
         - name: Configure git global email
-          shell: "git config --global user.email “chris.hendrick@gmail.com”"
+          shell: "git config --global user.email 'chris.hendrick@gmail.com'"
 
         - name: Configure git pull.rebase
           shell: "git config --global pull.rebase true"
@@ -58,7 +58,7 @@
           shell: "chown -R osboxes /home/osboxes/BeginnerAnsible"
 
         - name: Fix permissions on AdvancedAnsible
-          shell: "chown -R osboxes /home/osboxes/AdvancedAnsible"        
+          shell: "chown -R osboxes /home/osboxes/AdvancedAnsible"
 
         # Reboot after upgrade
         - name: Reboot host
