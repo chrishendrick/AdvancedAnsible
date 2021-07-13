@@ -45,6 +45,9 @@
         - name: Configure git global email
           shell: "git config --global user.email “chris.hendrick@gmail.com”"
 
+        - name: Configure git upstream branch
+          shell: "git config --global --set-upstream origin master"
+
         - name: Clone BeginnerAnsible
           shell: "git clone https://github.com/chrishendrick/BeginnerAnsible.git"
 
