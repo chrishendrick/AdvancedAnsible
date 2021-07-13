@@ -1,0 +1,59 @@
+-
+    name: 'Patch all hosts with OS specific modules'
+    hosts: ubuntuansible
+    vars:
+      reboot_connect_timeout: 5
+      reboot_post_reboot_delay: 15
+      reboot_timeout: 600
+    gather_facts: yes
+    remote_user: osboxes
+    become: true
+    tasks:
+
+        # Debian Family upgrade - matches for Ubuntu too
+        - name: Update repositories cache
+          apt:
+            update_cache: yes
+            cache_valid_time: 3600
+
+        - name: Update all packages to their latest version
+          apt:
+            name: "*"
+            state: latest
+
+        - name: Upgrade the OS (apt-get dist-upgrade)
+          apt:
+            upgrade: dist
+
+
+        - name: Install Ansible at latest version
+          apt:
+            name: "ansible"
+            state: latest
+
+        - name: Install msql community package
+          shell: ansible-galaxy collection install community.mysql
+
+        - name: Install git at latest version
+          apt:
+            name: "git"
+            state: latest
+
+        - name: Configure git global user name
+          shell: "git config ––global user.name “Chris Hendrick”"
+
+        - name: Configure git global email
+          shell: "git config ––global user.email “chris.hendrick@gmail.com”"
+
+        - name: Clone BeginnerAnsible
+          shell: "git clone https://github.com/chrishendrick/BeginnerAnsible.git"
+
+        - name: Clone AdavancedAnsible
+          shell: "git clone https://github.com/chrishendrick/AdvancedAnsible.git"
+
+        # Reboot after upgrade
+        - name: Reboot host
+          reboot:
+            connect_timeout: "{{ reboot_connect_timeout }}"
+            post_reboot_delay: "{{ reboot_post_reboot_delay }}"
+            reboot_timeout: "{{ reboot_timeout }}"
