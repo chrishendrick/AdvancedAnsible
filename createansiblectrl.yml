@@ -1,5 +1,5 @@
 -
-    name: 'Patch all hosts with OS specific modules'
+    name: 'Install all the needed pieces for an Ubuntu Ansible controller... get code too'
     hosts: ubuntuansible
     vars:
       reboot_connect_timeout: 5
@@ -40,10 +40,10 @@
             state: latest
 
         - name: Configure git global user name
-          shell: "git config ––global user.name “Chris Hendrick”"
+          shell: "git config --global user.name “Chris Hendrick”"
 
         - name: Configure git global email
-          shell: "git config ––global user.email “chris.hendrick@gmail.com”"
+          shell: "git config --global user.email “chris.hendrick@gmail.com”"
 
         - name: Clone BeginnerAnsible
           shell: "git clone https://github.com/chrishendrick/BeginnerAnsible.git"
